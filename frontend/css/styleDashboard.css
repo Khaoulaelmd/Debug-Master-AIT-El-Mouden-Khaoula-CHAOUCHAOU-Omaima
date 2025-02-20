@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #fff;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* Barre de navigation */
+nav {
+    padding: 1.5rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Logo */
+.logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Conteneur principal */
+.admin-container {
+    flex: 1;
+    padding: 2rem 5%;
+}
+
+/* En-tête du tableau de bord */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.dashboard-title {
+    font-size: 2.5em;
+    background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Grille des statistiques */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+}
+
+.stat-value {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #ff6b6b;
+    margin: 0.5rem 0;
+}
+
+/* Section des journaux récents */
+.recent-logs {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    overflow-x: auto;
+}
+
+/* Tableaux */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+th {
+    color: #ff6b6b;
+    font-weight: 600;
+}
+
+td {
+    font-size: 1em;
+}
+
+/* Boutons d'action */
+.action-button {
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+/* Bouton de déconnexion */
+.logout-button {
+    background: rgba(255, 107, 107, 0.2);
+    border: 2px solid #ff6b6b;
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    background: #ff6b6b;
+    color: #fff;
+}
+
+/* Effet de particules */
+.particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255, 107, 107, 0.8) 0%, transparent 70%);
+    animation: float 8s infinite linear;
+    opacity: 0;
+}
+
+/* Animation des particules */
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    30% { opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}

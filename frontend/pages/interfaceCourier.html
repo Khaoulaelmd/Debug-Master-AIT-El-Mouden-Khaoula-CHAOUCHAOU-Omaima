@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Signalement d'Erreur</title>
+    <link rel="stylesheet" href="../css/styleCourier.css">
+    <style>
+        .top-nav {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* Vous pouvez ajouter du style pour loader et message ici */
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="top-nav">
+        <h1>Contacter Admin</h1>
+        <a href="../pages/interfaceDebug.html" class="home-link">← Retour</a>
+    </div>
+    <!-- Formulaire avec l'ID corrigé pour l'employé -->
+    <form id="courrierForm">
+        <label for="employeeId">ID de l'employé :</label>
+        <input type="number" id="employeeId" placeholder="Ex : 123" required>
+
+        <label for="errorDetails">Description de l'erreur :</label>
+        <textarea id="errorDetails" placeholder="Décrivez l'erreur en détails..." required></textarea>
+
+        <button type="submit">Envoyer Message</button>
+    </form>
+
+    <!-- Éléments pour afficher le loader et le message -->
+    <div id="loader" style="display:none;">Chargement...</div>
+    <div id="message" style="display:none;"></div>
+</div>
+
+<script>
+    document.getElementById('courrierForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Récupérer l'ID de l'employé depuis le champ "employeeId"
+        const employeeId = document.getElementById('employeeId').value;
+        const description = document.getElementById('errorDetails').value;
+        const loader = document.getElementById('loader');
+        const messageBox = document.getElementById('message');
+
+        // Réinitialiser le message
+        messageBox.style.display = 'none';
+        loader.style.display = 'block';
+
+        try {
+            // Appel au backend pour récupérer l'employé via son ID
+            const employeeResponse = await fetch(`http://localhost:9095/api/employees/${employeeId}`);
+            if (!employeeResponse.ok) throw new Error("Employé non trouvé !");
+            const employee = await employeeResponse.json();
+
+            const courrier = {
+                idEmployee: employee.id,
+                idAdmine: 1,  // Valeur par défaut, à modifier selon vos besoins
+                description: description,
+                statut: "EN_ATTENTE",
+                dateEnvoi: new Date().toISOString()
+            };
+
+            // Envoi du courrier au backend
+            const response = await fetch("http://localhost:9094/api/couriers", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(courrier)
+            });
+
+            if (!response.ok) throw new Error("Erreur lors de l'envoi du courrier !");
+
+            messageBox.textContent = "Courrier envoyé avec succès !";
+            messageBox.className = "message success";
+            this.reset();
+        } catch (error) {
+            messageBox.textContent = error.message;
+            messageBox.className = "message error";
+        } finally {
+            messageBox.style.display = 'block';
+            loader.style.display = 'none';
+        }
+    });
+</script>
+<a href="interfaceCourier.html"></a>
+</body>
+</html>

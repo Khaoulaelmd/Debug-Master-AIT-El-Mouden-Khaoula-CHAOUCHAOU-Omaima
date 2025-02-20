@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Mail - Employee Interface</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #2b1055, #7597de);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+            animation: slideIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px) rotate(-5deg);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5em;
+            text-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        label {
+            display: block;
+            margin: 1.5rem 0 0.5rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            background: rgba(0,0,0,0.2);
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 20px rgba(255,107,107,0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 1.2rem;
+            margin-top: 2rem;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            font-size: 1.1em;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,107,107,0.4);
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+            transparent,
+            rgba(255,255,255,0.2),
+            transparent);
+            transform: rotate(45deg);
+            animation: shine 1.5s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -50%; }
+            100% { left: 150%; }
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            animation: particle 5s infinite linear;
+        }
+
+        @keyframes particle {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% { opacity: 1; }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="particles" id="particles"></div>
+    <h1>📧 Gestion du Courrier</h1>
+    <form id="mailForm">
+        <label for="sender">Expéditeur :</label>
+        <input type="text" id="sender" placeholder="Service/Section" required>
+
+        <label for="content">Contenu:</label>
+        <textarea id="content" placeholder="Détails du courrier..." required></textarea>
+
+        <button type="submit">
+            <span class="button-text">Envoyer le Courrier 🚀</span>
+        </button>
+    </form>
+</div>
+
+<script>
+    // Create animated particles
+    function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        for(let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.width = particle.style.height =
+                Math.random() * 5 + 2 + 'px';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            particlesContainer.appendChild(particle);
+        }
+    }
+    createParticles();
+
+    document.getElementById('mailForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Loading animation
+        const button = this.querySelector('button');
+        button.classList.add('loading');
+
+        setTimeout(() => {
+            button.classList.remove('loading');
+            alert('Mail sent successfully!');
+            this.reset();
+        }, 1500);
+    });
+</script>
+</body>
+</html>

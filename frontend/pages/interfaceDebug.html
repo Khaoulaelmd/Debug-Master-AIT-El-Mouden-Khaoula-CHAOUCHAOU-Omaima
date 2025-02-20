@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>DebugBot</title>
+    <link rel="stylesheet" href="../css/styleDebug.css">
+</head>
+<body>
+<a href="../pages/interfaceAcceuil.html" class="home-link">← Retour </a>    </div>
+
+<div class="chat-container">
+    <div class="chat-box" id="chatBox">
+        <div class="chat-message bot-message">Bonjour ! Je suis DebugBot. Décrivez votre problème et je vais vous aider à le résoudre.</div>
+    </div>
+    <div class="input-container">
+        <input type="text" id="userInput" placeholder="Décrivez votre problème...">
+        <button onclick="sendMessage()">Envoyer</button>
+        <button onclick="window.location.href='interfaceCourier.html'">Contacter Admin</button>
+    </div>
+</div>
+
+<script src="../js/scriptDebug.js"></script>
+</body>
+</html>

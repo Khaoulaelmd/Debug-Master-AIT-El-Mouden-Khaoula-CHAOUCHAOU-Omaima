@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - DebugMaster</title>
+    <link rel="stylesheet" href="../css/styleLogin.css">
+</head>
+<body>
+<div class="particles" id="particles"></div>
+
+<nav>
+    <div class="logo">DebugMaster</div>
+    <a href="../pages/interfaceAcceuil.html" class="home-link">← Retour à l'accueil</a></nav>
+<div class="login-container">
+    <div class="login-box">
+        <h2>Connexion Admin</h2>
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Nom d'utilisateur">
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Mot de passe">
+        </div>
+        <button class="login-button" onclick="validateLogin()">Se connecter</button>
+        <p class="error-message" id="error-message">Identifiants incorrects</p>
+    </div>
+</div>
+
+<script src="../js/scriptLogin.js"></script>
+</body>
+</html>
