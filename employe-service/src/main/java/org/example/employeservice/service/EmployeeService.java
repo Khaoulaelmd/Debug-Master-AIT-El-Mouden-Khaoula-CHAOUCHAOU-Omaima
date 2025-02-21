@@ -17,8 +17,7 @@ public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
-    @Autowired
-    private RestTemplate restTemplate;
+
 
     private String aiServiceUrl;
     public List<Employe> getAllEmployees() {
